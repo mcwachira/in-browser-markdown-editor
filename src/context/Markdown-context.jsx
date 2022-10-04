@@ -35,6 +35,7 @@ export const MarkDownProvider = ({children}) => {
         setMarkDownText,
         parsedContent,
         setParsedContent,
+        showContent,
         setShowContent
 
     }
