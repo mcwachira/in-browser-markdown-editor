@@ -11,7 +11,7 @@ export const MarkdownInput = styled.textarea`
 display:flex ;
 flex:1;
 height:100vh ;
-width:100%;
+/* width:100%; */
  border: none;
 resize:none ;
 outline:none ;
