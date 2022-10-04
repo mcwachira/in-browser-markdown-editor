@@ -1,19 +1,21 @@
-import { useState } from 'react'
+
 import reactLogo from './assets/react.svg'
 import './App.css'
-import MarkDownEditor from './components/Markdown-Editor/MarkDownEditor'
-import { MarkDownOutput } from './components/Markdown=Preview/Markdown-preview.styles'
-import MarkDownPreview from './components/Markdown=Preview/MarkDown-preview'
+import { Routes, Route } from 'react-router-dom'
+import Home from './routes/Home/Home'
+import Navigation from './routes/Navigation/Navigation'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
+ <>
+  <Routes>
+  <Route path='/' element={<Navigation/>}>
+          <Route index={true} element={<Home />} />
+  </Route>
  
-      <div style={{display:'flex'}}>
-     <MarkDownEditor/>
-     <MarkDownPreview/>
-    </div>
+  </Routes>
+ </>
   )
 }
 

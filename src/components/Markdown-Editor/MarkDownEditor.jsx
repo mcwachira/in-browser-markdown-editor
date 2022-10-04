@@ -17,7 +17,7 @@ const MarkDownEditor = () => {
 
   return (
     <>
-<MarkdownEditorContainer>
+
 
 
 
@@ -28,7 +28,7 @@ const MarkDownEditor = () => {
 
 
 
-            </MarkdownEditorContainer>
+         
 
     </>
   )
