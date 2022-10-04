@@ -24,6 +24,8 @@ export const MarkDownProvider = ({children}) => {
     const [parsedContent,setParsedContent] = useState("");
     const [showContent, setShowContent] = useState(false);
 
+    const [isVisible, setIsVisible] = useState(false)
+
     useEffect(() => {
             data.map((d) => setMarkDownText(d.content))
             const md = new MarkdownIt().use(highlightjs);
@@ -36,7 +38,10 @@ export const MarkDownProvider = ({children}) => {
         parsedContent,
         setParsedContent,
         showContent,
-        setShowContent
+        setShowContent,
+        isVisible, 
+        setIsVisible
+
 
     }
 
