@@ -2,7 +2,8 @@ import styled from "styled-components";
 
 
 export const PreviewContainer = styled.div`
-position: sticky;
+/* position: relative; */
+position: absolute;
 top: 70px;
 height: 50px;
 width: 100%;
@@ -11,6 +12,7 @@ display: flex;
 align-items: center;
 justify-content: space-between;
 padding: 0 auto;
+z-index: 10;
 
 `
 

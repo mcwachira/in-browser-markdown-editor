@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { FaBars, FaSave } from 'react-icons/fa'
 import {RiDeleteBin5Line} from 'react-icons/ri'
 import {
@@ -14,18 +14,29 @@ import {
 } from './Navigation.styles'
 
 import { MarkDownContext } from '../../context/Markdown-context'
+import SideNav from '../../components/SideNav/SideNav'
 import { Outlet } from 'react-router-dom'
 
 
 
 const Navigation = () => {
+
+    const { isVisible, setIsVisible } = useContext(MarkDownContext)
+
+    const handleClick = () => {
+setIsVisible(() =>!isVisible)
+ console.log('clicked')
+
+    }
     return (
         <>
             <NavBarContainer>
 
                 <NavBarContainerLeft>
-                    <OpenButton>
+                <SideNav/>
+                    <OpenButton onClick={handleClick}>
                         <FaBars size={35} style={{color:'white'}}/>
+                  
                     </OpenButton>
                  
                         <NavLink to='/'>
