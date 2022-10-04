@@ -4,7 +4,7 @@ import { MarkDownContext } from '../../context/Markdown-context'
 
 const MarkDownEditor = () => {
 
-    const {markDownText, setMarkDownText} = useContext(MarkDownContext)
+    const {markDownText, setMarkDownText ,showContent} = useContext(MarkDownContext)
 
     const handleChange = (e) => {
 
@@ -22,8 +22,10 @@ const MarkDownEditor = () => {
 
 
 
-                  <MarkdownInput MarkdownInput value={markDownText} onChange={(e) => handleChange(e)}>
-                  </MarkdownInput>
+          <MarkdownInput value={markDownText} onChange={(e) => handleChange(e)} style={{ display: showContent === true ? 'none' : 'flex' }}>
+              {markDownText}
+
+          </MarkdownInput>
 
 
 
