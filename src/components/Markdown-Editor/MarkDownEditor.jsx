@@ -1,11 +1,10 @@
-import React, { useState } from 'react'
-import { MarkdownEditorContainer, MarkdownInput, MarkDownOutput } from './MarkdownEditor'
-import MarkdownIt from 'markdown-it'
-import highlightjs from 'markdown-it-highlightjs'
-import data from '../../data/data.json'
+import React, { useContext } from 'react'
+import { MarkdownEditorContainer, MarkdownInput } from './MarkdownEditor'
+import { MarkDownContext } from '../../context/Markdown-context'
+
 const MarkDownEditor = () => {
-    const [markDownText, setMarkDownText] = useState('')
-   const [parsedContent , setParsedContent] = useState("")
+
+    const {markDownText, setMarkDownText} = useContext(MarkDownContext)
 
     const handleChange = (e) => {
 
@@ -15,32 +14,21 @@ const MarkDownEditor = () => {
     }
 
 
-    const convertToMarkDown = (e) =>{
-        e.preventDefault();
-        const md = new MarkdownIt()
-        setParsedContent(md.render(markDownText))
 
-    
-    }
   return (
     <>
 <MarkdownEditorContainer>
 
-<form  onSubmit={convertToMarkDown}>
+
 
 
                   <MarkdownInput MarkdownInput value={markDownText} onChange={(e) => handleChange(e)}>
                   </MarkdownInput>
 
-                  <button type='submit'>
-
-                    Convert 
-                  </button>
-</form>
 
 
-              <MarkDownOutput dangerouslySetInnerHTML={{ __html: parsedContent }}></MarkDownOutput>
-</MarkdownEditorContainer>
+
+            </MarkdownEditorContainer>
 
     </>
   )
