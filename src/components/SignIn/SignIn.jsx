@@ -46,7 +46,7 @@ const SignIn = () => {
                 
                   {/* passed the firebase signInWithGooglePopup method directly on the onclick method 
                     instead of passing another function to help us sign in with google */}
-                  <Button type='button' buttonType={BUTTON_TYPE_CLASSES.google} >  Google Sign In</Button>
+                  <Button type='button' buttonType={BUTTON_TYPE_CLASSES.google}>  Google </Button>
 
               </ButtonContainer>
 

@@ -33,7 +33,7 @@ setIsVisible(() =>!isVisible)
             <NavBarContainer>
 
                 <NavBarContainerLeft>
-                <SideNav/>
+                {/* <SideNav/> */}
                     <OpenButton onClick={handleClick}>
                         <FaBars size={35} style={{color:'white'}}/>
                   
