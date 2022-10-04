@@ -12,4 +12,11 @@ align-items: start;
 gap:5rem ;
   margin-right: auto;
     margin-left: auto;
+
+ &:before{
+    content:"";
+    border:1px solid #333 ;
+    align-self:stretch ;
+   
+ }
 `

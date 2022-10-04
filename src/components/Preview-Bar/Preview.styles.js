@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 export const PreviewContainer = styled.div`
 /* position: relative; */
-position: absolute;
+position:sticky;
 top: 70px;
 height: 50px;
 width: 100%;

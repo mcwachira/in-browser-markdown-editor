@@ -7,7 +7,6 @@ width: 20rem;
 /* min-height: 100vh; */
 background: #333;
 color: #fff;
-z-index: #999;
 transition: all 0.5s;
 position: absolute;
 z-index: 100;
