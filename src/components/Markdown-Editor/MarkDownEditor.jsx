@@ -22,6 +22,7 @@ const MarkDownEditor = () => {
 
 
 
+{/* added a show condition to toggle to make the preview page occupy the full width when a button is clicked. */}
           <MarkdownInput value={markDownText} onChange={(e) => handleChange(e)} style={{ display: showContent === true ? 'none' : 'flex' }}>
               {markDownText}
 

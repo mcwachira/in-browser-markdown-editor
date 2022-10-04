@@ -38,6 +38,7 @@ const Preview = () => {
                     </h3>
 
                     <PreviewButton onClick={() => ShowFullScreen()}>
+                    {/* button to make the preview page full screen  when a button is clicked*/}
                         {isClicked ? <img src={EyeBtnShow} alt=" show preview button" />: <img src={EyeBtnHide} alt="hide preview button" />}
                     </PreviewButton>
                 </PreviewSide>
