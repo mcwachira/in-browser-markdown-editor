@@ -5,6 +5,8 @@ import { Routes, Route } from 'react-router-dom'
 import Home from './routes/Home/Home'
 import Navigation from './routes/Navigation/Navigation'
 import Authentication from './routes/Authentication/Authentication'
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
 
@@ -17,6 +19,7 @@ function App() {
   </Route>
  
   </Routes>
+      <ToastContainer />
  </>
   )
 }
