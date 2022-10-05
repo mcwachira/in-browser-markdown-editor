@@ -51,7 +51,7 @@ googleProvider.setCustomParameters({
 
 //Initialize our firebase db
 
-const db = getFirestore()
+export const db = getFirestore()
 
 
 //function to create and store sign up users in a users collection in our db
@@ -72,8 +72,8 @@ export const CreateUserDocumentFromAuth = async(userAuth, additionalInfo={} ) =>
     const userSnapShot = await getDoc(userDocRef)
 
 
-    //create one iff it does not exist
-    if(!userSnapShot.doc()){
+    //create one if it does not exist
+    if(!userSnapShot.exists()){
      const {displayName, email} = userAuth;
      const createdAt = serverTimestamp()
      console.log(createdAt)
@@ -108,3 +108,14 @@ export const CreateUserDocumentFromAuth = async(userAuth, additionalInfo={} ) =>
     return userDocRef;
 
 }
+
+
+
+//sign in with email and password method
+
+export const SignAuthUserWithEmailAndPassword = async(email , password)=> {
+
+    if(!email || !password) return 
+    return await signInWithEmailAndPassword(email, password)
+}
+

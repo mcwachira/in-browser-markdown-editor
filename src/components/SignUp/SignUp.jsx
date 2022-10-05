@@ -59,7 +59,7 @@ const SignUp = () => {
             const {user} =  await createUserWithEmailAndPassword(auth, email, password);
 
             console.log(user)
-            // await CreateUserDocumentFromAuth(user, {displayName})
+        await CreateUserDocumentFromAuth(user, {displayName})
             toast.success('user created successfully')
             resetFormInputs()
             navigate('/')
