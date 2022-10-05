@@ -3,6 +3,7 @@ import { RiCloseLine } from 'react-icons/ri'
 import CloseIcon from '../../assets/icon-close.svg'
 import AddButton from '../../assets/icon-document.svg'
 import { MarkDownContext } from '../../context/Markdown-context'
+import { toast } from 'react-toastify'
 import {
     SideNavContainer,
     SideNavHeader,
@@ -15,12 +16,20 @@ import {
 
 const SideNav = () => {
 
-    const { isVisible, setIsVisible } = useContext(MarkDownContext)
+    const { isVisible, setIsVisible, markDownText, setMarkDownText, setDocumentName } = useContext(MarkDownContext)
     const x = -100;
     const y = 0;
 
     const toggleSideNav = () => {
     setIsVisible(!isVisible)
+    }
+
+    const handleClick = () => {
+        setMarkDownText("")
+        setDocumentName("")
+        toggleSideNav()
+        toast.success('new document created')
+
     }
 
     return (
@@ -40,7 +49,7 @@ const SideNav = () => {
                 </SideNavHeader>
 
                 <SideNavBody>
-                    <AddDocument>
+                    <AddDocument onClick={handleClick}>
                         New Document
                     </AddDocument>
                 </SideNavBody>

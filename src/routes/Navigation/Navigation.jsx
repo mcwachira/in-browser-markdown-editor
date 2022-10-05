@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import { FaBars, FaSave } from 'react-icons/fa'
 import {RiDeleteBin5Line} from 'react-icons/ri'
+// import data from '../../data/data.json
 import {
     NavBarContainer,
     OpenButton,
@@ -13,7 +14,7 @@ import {
 
 } from './Navigation.styles'
 
-import { MarkDownContext } from '../../context/Markdown-context'
+import { MarkDownContext  } from '../../context/Markdown-context'
 import SideNav from '../../components/SideNav/SideNav'
 import { Outlet } from 'react-router-dom'
 
@@ -21,13 +22,18 @@ import { Outlet } from 'react-router-dom'
 
 const Navigation = () => {
 
-    const { isVisible, setIsVisible } = useContext(MarkDownContext)
+    const { isVisible, setIsVisible, documentName, setDocumentName } = useContext(MarkDownContext)
 
     const handleClick = () => {
 setIsVisible(() =>!isVisible)
  console.log('clicked')
-
     }
+        const handleChange = (e) => {
+            console.log(e.target.value)
+    setDocumentName(e.target.value)
+ }
+
+    
     return (
         <>
             <NavBarContainer>
@@ -47,7 +53,7 @@ setIsVisible(() =>!isVisible)
                         </NavLink>
                
 
-                    <InputBox/>
+                    <InputBox name='name' onChange={handleChange} value={documentName}/>
                 </NavBarContainerLeft>
 
                 <NavBarContainerRight>

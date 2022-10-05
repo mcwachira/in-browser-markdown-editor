@@ -12,22 +12,32 @@ export const MarkDownContext = createContext({
     markDownText:"",
     showContent:false,
     parsedContent:"",
+    documentName:"",
 
     setParsedContent:() =>{},
     setMarkDownText: () => {},
     setShowContent: () => {},
+    setDocumentName:() => {},
 
 })
 
+const dt = data.map((d) => (d))
+console.log(dt[0].name)
+console.log(dt[1])
+
+
 export const MarkDownProvider = ({children}) => {
-    const [markDownText, setMarkDownText] = useState("");
+    const [markDownText, setMarkDownText] = useState(dt[1].content);
+    const [documentName, setDocumentName] = useState(dt[1].name)
     const [parsedContent,setParsedContent] = useState("");
     const [showContent, setShowContent] = useState(false);
+
 
     const [isVisible, setIsVisible] = useState(false)
 
     useEffect(() => {
-            data.map((d) => setMarkDownText(d.content))
+           
+            //console.log(markDownText)
             const md = new MarkdownIt().use(highlightjs);
             setParsedContent(md.render(markDownText))
     }, [markDownText])
@@ -40,7 +50,9 @@ export const MarkDownProvider = ({children}) => {
         showContent,
         setShowContent,
         isVisible, 
-        setIsVisible
+        setIsVisible,
+        documentName,
+        setDocumentName,
 
 
     }
