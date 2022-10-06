@@ -67,7 +67,7 @@ background-color:#e46643 ;
 display:flex ;
 align-items:center ;
 justify-content:space-between ;
-padding:0 2rem;
+padding:1rem 2rem;
 cursor:pointer ;
 margin-right:1rem ;
 `

@@ -18,8 +18,8 @@ import {
     doc,
     setDoc,
     getDoc,
-    serverTimestamp,
     collection,
+    serverTimestamp,
     writeBatch,
     query,
     getDocs,
@@ -110,6 +110,42 @@ export const CreateUserDocumentFromAuth = async(userAuth, additionalInfo={} ) =>
 }
 
 
+export const CreateMarkDownDocumentFromAuth = async (userAuth, markDownText) => {
+    //1. first check if the user exist and if  exist
+    if (!userAuth) return
+    console.log(markDownText)
+
+    const MarkdownRef = doc( collection(db, 'mydocuments'))
+    console.log(MarkdownRef)
+    const createdAt = serverTimestamp()
+
+
+
+    //3 .create a snapshot of the data and check if it exist in the db
+    const markDownSnapShot = await getDoc(MarkdownRef)
+
+
+    //create one if it does not exist
+    if (!markDownSnapShot.exists()) {
+    try {
+
+        await setDoc(MarkdownRef, {
+            markDownText,
+            createdAt,
+            ...additionalInfo
+
+        })
+        
+    } catch (error) {
+
+        console.log('error creating document', error)
+    }
+
+    console.log(MarkdownRef)
+    return MarkdownRef
+}
+
+}
 
 //sign in with email and password method
 

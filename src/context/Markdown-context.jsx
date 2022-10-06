@@ -22,8 +22,8 @@ export const MarkDownContext = createContext({
 })
 
 const dt = data.map((d) => (d))
-console.log(dt[0].name)
-console.log(dt[1])
+// console.log(dt[0].name)
+// console.log(dt[1])
 
 
 export const MarkDownProvider = ({children}) => {

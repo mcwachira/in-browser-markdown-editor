@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext , useEffect} from 'react'
 import { FaBars, FaSave } from 'react-icons/fa'
 import {RiDeleteBin5Line} from 'react-icons/ri'
 // import data from '../../data/data.json
@@ -17,13 +17,18 @@ import {
 import { MarkDownContext  } from '../../context/Markdown-context'
 import SideNav from '../../components/SideNav/SideNav'
 import { Outlet } from 'react-router-dom'
-
+import { getAuth } from 'firebase/auth'
+import { CreateMarkDownDocumentFromAuth } from '../../utils/firebase'
+import { toast } from 'react-toastify'
+import { serverTimestamp, addDoc , doc, collection } from 'firebase/firestore'
+import { db } from '../../utils/firebase'
 
 
 const Navigation = () => {
 
-    const { isVisible, setIsVisible, documentName, setDocumentName } = useContext(MarkDownContext)
+    const { isVisible, setIsVisible, documentName, setDocumentName , markDownText} = useContext(MarkDownContext)
 
+    const auth = getAuth()
     const handleClick = () => {
 setIsVisible(() =>!isVisible)
  console.log('clicked')
@@ -33,6 +38,41 @@ setIsVisible(() =>!isVisible)
     setDocumentName(e.target.value)
  }
 
+ 
+ const markData = {
+    markDownText,
+    createdAt:serverTimestamp(),
+ }
+ console.log(markData)
+
+    const storeMarkDownDocument = async () => {
+
+        try {
+
+            const docRef = await addDoc(collection(db, 'mydocuments'), markData)
+            console.log(docRef)
+
+            toast.success('successful stored document in firestore')
+
+        } catch (error) {
+            toast.error('error storing document')
+            console.log('error',error)
+        }
+
+    }
+    const handleSubmit = (e) => {
+        // console.log(markDownText)
+        e.preventDefault();
+
+        storeMarkDownDocument()
+      
+    }
+
+    useEffect(() => {
+
+     
+
+    }, [markDownText])
     
     return (
         <>
@@ -66,7 +106,7 @@ setIsVisible(() =>!isVisible)
                         <RiDeleteBin5Line size={35} style={{ color: 'grey' }} />
                     </DeleteButton>
 
-                    <SaveButton>
+                    <SaveButton onClick={handleSubmit}>
                         <FaSave size={20} style={{ margin: '0 .5rem' }} />
                         <h3>
                             Save Changes
