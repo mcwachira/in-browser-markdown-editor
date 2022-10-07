@@ -1,4 +1,4 @@
-import React, { useContext , useEffect} from 'react'
+import React, { useContext , useEffect , useState} from 'react'
 import { FaBars, FaSave } from 'react-icons/fa'
 import {RiDeleteBin5Line} from 'react-icons/ri'
 // import data from '../../data/data.json
@@ -10,14 +10,15 @@ import {
     DeleteButton,
     SaveButton,
     InputBox ,
-    NavLink
+    NavLink,
+
 
 } from './Navigation.styles'
 
 import { MarkDownContext  } from '../../context/Markdown-context'
 import SideNav from '../../components/SideNav/SideNav'
 import { Outlet } from 'react-router-dom'
-import { getAuth } from 'firebase/auth'
+import { getAuth, onAuthStateChanged } from 'firebase/auth'
 import { CreateMarkDownDocumentFromAuth } from '../../utils/firebase'
 import { toast } from 'react-toastify'
 import { serverTimestamp, addDoc , doc, collection } from 'firebase/firestore'
@@ -26,9 +27,13 @@ import { db } from '../../utils/firebase'
 
 const Navigation = () => {
 
-    const { isVisible, setIsVisible, documentName, setDocumentName , markDownText} = useContext(MarkDownContext)
+    const[markData, setMarkData] = useState({})
+    const [loggedInUser, SetLoggedInUser] = useState("")
+
+    const { isVisible, setIsVisible, documentName, setDocumentName , parsedContent} = useContext(MarkDownContext)
 
     const auth = getAuth()
+ 
     const handleClick = () => {
 setIsVisible(() =>!isVisible)
  console.log('clicked')
@@ -39,11 +44,20 @@ setIsVisible(() =>!isVisible)
  }
 
  
- const markData = {
-    markDownText,
-    createdAt:serverTimestamp(),
- }
- console.log(markData)
+
+
+ onAuthStateChanged(auth, (user) => {
+    if(user){
+        const uid = user.uid
+        SetLoggedInUser(user.displayName)
+     setMarkData({
+         createdAt: serverTimestamp(),
+         parsedContent,
+         title: documentName,
+         userRef:uid
+     })
+    }
+ })
 
     const storeMarkDownDocument = async () => {
 
@@ -60,6 +74,9 @@ setIsVisible(() =>!isVisible)
         }
 
     }
+
+      
+
     const handleSubmit = (e) => {
         // console.log(markDownText)
         e.preventDefault();
@@ -72,7 +89,7 @@ setIsVisible(() =>!isVisible)
 
      
 
-    }, [markDownText])
+    }, [])
     
     return (
         <>
@@ -98,9 +115,9 @@ setIsVisible(() =>!isVisible)
 
                 <NavBarContainerRight>
                     <NavLink to='/authentication'>
-                        <h3>
-                            Sign In
-                        </h3>
+                  
+                        {auth.currentUser ? (<h3> {loggedInUser} </h3>) : <h3>Sign In</h3>}  
+                     
                     </NavLink>
                     <DeleteButton>
                         <RiDeleteBin5Line size={35} style={{ color: 'grey' }} />

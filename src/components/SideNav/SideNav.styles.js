@@ -35,13 +35,18 @@ padding:1rem 1rem;
 export const SideNavBody = styled.div`
 display: flex;
 flex-direction: column;
-min-height: 100vh;
+min-height: auto;
 `
 
+
+export const SideNavList = styled.p`
+margin:10rem auto;
+font-size:1.2rem;
+`
 export const AddDocument = styled.button`
 background-color: #e46634;
 border-radius: 5px;
-margin: 50rem auto;
+margin: 10rem auto;
 padding: 1rem 2rem;
 cursor: pointer;
 align-self: flex-end;
