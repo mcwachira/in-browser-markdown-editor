@@ -4,8 +4,9 @@ import CloseIcon from '../../assets/icon-close.svg'
 import AddButton from '../../assets/icon-document.svg'
 import { MarkDownContext } from '../../context/Markdown-context'
 import { toast } from 'react-toastify'
-import { collection, getDocs } from 'firebase/firestore'
+import { collection, getDocs , getDoc, doc} from 'firebase/firestore'
 import { db } from '../../utils/firebase'
+import { useParams, Link } from 'react-router-dom'
 import {
     SideNavContainer,
     SideNavHeader,
@@ -24,6 +25,8 @@ const SideNav = () => {
     const x = -100;
     const y = 0;
 
+    const params = useParams()
+
     const toggleSideNav = () => {
     setIsVisible(!isVisible)
     }
@@ -39,7 +42,11 @@ const SideNav = () => {
 
     const getMyDocuments = async() => {
         const querySnapShot = await getDocs(collection(db, "mydocuments"));
+
+        console.log(querySnapShot.id)
+        console.log(params.title)
         querySnapShot.forEach((doc) => {
+            console.log(doc.data())
             const data = doc.data()?.title 
             // if(!documentList.includes(data))
             // documentList.push(data)
@@ -49,13 +56,24 @@ const SideNav = () => {
            
            
         })
+        // const documentRef = collection(db, 'mydocumets')
+        // console.log(documentRef)
 
       
     }
     console.log(documentList)
  
 
+    // const fetchData = async() => {
+    //     const docRef = doc(db, 'mydocuments', params.title)
+    //     const docSnapshot = await getDoc(docRef)
+    //     if(docSnapshot.exists()){
+    //         console.log(docSnapshot)
+    //     }
+    // }
+
     useEffect(() => {
+        // fetchData()
         getMyDocuments()
     }, [])
 
@@ -79,7 +97,10 @@ const SideNav = () => {
                 <SideNavBody>
                 
                     <SideNavList>
-                        {documentList}
+                    <Link  to={`/${documentList}`}>
+                         {documentList}
+                    </Link>
+                       
                     </SideNavList>
                     <AddDocument onClick={handleClick}>
                         New Document

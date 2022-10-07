@@ -64,7 +64,7 @@ setIsVisible(() =>!isVisible)
         try {
 
             const docRef = await addDoc(collection(db, 'mydocuments'), markData)
-            console.log(docRef)
+            console.log(docRef.id)
 
             toast.success('successful stored document in firestore')
 
