@@ -1,19 +1,20 @@
 import styled from "styled-components";
 
-export const MarkdownEditorContainer = styled.div `
+export const MarkdownEditorContainer = styled.form`
 
 display: flex;
-flex-direction: column;
+height:100vh ;
+width:50%;
 
 
 `
 export const MarkdownInput = styled.textarea`
 display:flex ;
 flex:1;
-height:100vh ;
 /* width:100%; */
  border: none;
-resize:none ;
+ height:100vh ;
+/* resize:none ; */
 outline:none ;
 overflow:hidden ;
 order:-1;

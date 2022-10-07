@@ -9,7 +9,7 @@ const MarkDownPreview = () => {
     return (
         <>
 
-            <MarkDownOutput dangerouslySetInnerHTML={{ __html: parsedContent }}></MarkDownOutput>
+            <MarkDownOutput dangerouslySetInnerHTML={{ __html: parsedContent }}/>
 
 
         </>
